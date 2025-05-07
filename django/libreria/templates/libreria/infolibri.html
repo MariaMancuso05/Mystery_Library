@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      background-image: url("{% static 'images/Background_Acquisti.png' %}");
+      background-size: cover;
+      background-position: center;
+      color: #FFFFFF;
+      font-family: 'Playfair Display', sans-serif;
+      text-align: center;
+      padding-top: 50px;
+    }
+
+    .libro-container {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+      max-width: 600px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .libro-img {
+      width: 150px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 5px;
+      margin-top: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+    }
+
+    .libro-info {
+      margin-top: 20px;
+    }
+
+    h2 {
+      font-size: 2.5em;
+      text-shadow: 2px 2px 8px #000000;
+      margin-bottom: 20px;
+    }
+
+    h3 {
+      font-size: 2.0em;
+      text-shadow: 2px 2px 8px #000000;
+      margin-bottom: 15px;
+    }
+
+    .button3 {
+      background-color: black;
+      color: white;
+      border: 3px solid #c0392b;
+      padding: 10px 20px;
+      font-size: 1.2em;
+      border-radius: 10px;
+      cursor: pointer;
+      transition-duration: 0.4s;
+      margin-top: 20px;
+    }
+
+    .button3:hover {
+      background-color: #c0392b;
+      color: black;
+    }
+
+  </style>
+</head>
+<body>
+  {% block content %}
+    <h2>Il libro</h2>
+
+    <div class="libro-container">
+      <h1>{{ libro.titolo }}</h1>
+      <p><strong>Autore:</strong> {{ libro.autore }}</p>
+      <p><strong>Prezzo:</strong> €{{ libro.prezzo }}</p>
+
+      {% if libro.copertina %}
+          <img src="{{ libro.copertina.url }}" alt="Copertina di {{ libro.titolo }}" class="libro-img">
+      {% else %}
+        <p>Immagine non disponibile</p> 
+      {% endif %}
+
+      <div class="libro-info">
+        {% if trama %}
+        <h3>Trama</h3>
+        <p>{{ trama.trame }}</p>
+      {% else %}
+        <p>Trama non disponibile</p>
+      {% endif %}
+      </div>
+
+      <a href="{% url 'libreria:shop' %}">
+        <button class="button3">Torna allo shop</button>
+      </a>
+    </div>
+  {% endblock %}
+</body>
+</html>

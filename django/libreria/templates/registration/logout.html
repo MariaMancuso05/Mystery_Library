@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+<!DOCTYPE html>
+<html>
+<head>
+{% block title %}Logout{% endblock %}
+</head>
+{% block content %}
+<div class="container">
+    <h2>Hai effettuato il logout con successo</h2>
+    <form method="post" action="{% url 'libreria:logout' %}">
+        {% csrf_token %}
+        <a href="{% url 'libreria:login' %}" button class="button-group button2" type="submit">Torna al Login</button>
+        </a>
+        <a href="{% url 'libreria:homelib' %}" button class="button-group button1" type="submit">Torna alla home</button>
+        </a>
+    </form>
+</div>
+{% endblock %}
+</html>

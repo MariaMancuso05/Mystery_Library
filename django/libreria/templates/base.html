@@ -1,0 +1,87 @@
+<!-- templates/base.html -->
+{% load static %}
+<!DOCTYPE html> <!-- mostra lo stile per le pagine di signup, login e logout -->
+<html>
+<head>
+  <style>
+    body {
+      background-image: url("{% static 'images/Background_signup_login.png' %}");
+      background-size: cover;
+      background-position: center;
+      color: #FFFFFF;
+      font-family: 'Playfair Display', sans-serif;
+      text-align: center;
+      padding-top: 50px;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100vh;
+    }
+    h2 {
+      font-size: 2.5em;
+      text-shadow: 2px 2px 8px #000000;
+      margin-bottom: 20px;
+    }
+    a {
+  text-decoration: none;
+    }
+    form {
+      background: rgba(0, 0, 0, 0.7); 
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+      text-align: left;
+      margin: auto; /* Tiene il form centrato, ma il testo a sinistra */
+      width: 300px;
+    }
+    input[type="text"], input[type="password"], input[type="email"] {
+      width: calc(100% - 20px);
+      padding: 10px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 5px;
+      font-size: 1em;
+    }
+    .button-group{
+            display: flex;
+            justify-content: center;
+            gap: 20px; /* distanza tra i bottoni */
+            margin-top: 20px;
+        }
+    .button1 {
+      background-color: black;
+      color: white;
+      border: 3px solid #e67e22;
+      text-decoration: none;
+      padding: 10px 20px;
+      font-size: 1.2em;
+      border-radius: 10px;
+      cursor: pointer;
+      transition-duration: 0.4s;
+      margin-top: 10px;
+    }
+    .button2 {
+      background-color: black;
+      color: white; 
+      border: 3px solid #c0392b; 
+      text-decoration: none;
+      padding: 10px 20px;
+      font-size: 1.2em;
+      border-radius: 10px;
+      cursor: pointer;
+      transition-duration: 0.4s; 
+      margin-top: 10px;
+    }
+    .button1:hover {
+      background-color: #e67e22;
+      color: black;
+    }
+    .button2:hover {
+      background-color: #c0392b;
+      color: black;
+    }
+    </style>
+</head>
+</html>

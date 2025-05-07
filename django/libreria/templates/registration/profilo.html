@@ -1,0 +1,133 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+  background-image: url("{% static 'images/Background_profilo.png' %}");
+  background-size: cover;
+  background-position: center;
+  color: #FFFFFF;
+  font-family: 'Playfair Display', serif;  
+  text-align: center;
+  padding-top: 100px;
+} 
+.container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+}
+form {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+      width: 300px;
+    }
+
+h2 {
+  font-size: 48px;
+  text-shadow: 2px 2px 8px #000000;
+}
+
+p {
+  font-size: 20px;
+  margin-bottom: 30px;
+}
+a {
+  text-decoration: none;
+}
+.button {
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  font-size: 18px;
+  margin: 10px auto;
+  transition: 0.4s ease-in-out;
+  cursor: pointer;
+  width: 200px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+}
+
+.button1 {
+      background-color: black;
+      color: white;
+      border: 3px solid #f4d03f;
+      padding: 10px 20px;
+      font-size: 1.2em;
+      border-radius: 10px;
+      cursor: pointer;
+      transition-duration: 0.4s;
+      margin-top: 10px;
+    }
+    .button1:hover {
+      background-color: #f4d03f;
+      color: black;
+    }
+    .button2 {
+      background-color: black;
+      color: white;
+      border: 3px solid #e67e22;
+      padding: 10px 20px;
+      font-size: 1.2em;
+      border-radius: 10px;
+      cursor: pointer;
+      transition-duration: 0.4s;
+      margin-top: 10px; 
+    }
+    .button2:hover {
+      background-color: #e67e22;
+      color: black;
+    }
+    .button3 {
+      background-color: black;
+      color: white;
+      border: 3px solid #c0392b;
+      padding: 10px 20px;
+      font-size: 1.2em;
+      border-radius: 10px;
+      cursor: pointer;
+      transition-duration: 0.4s;
+      margin-top: 10px;
+    }
+    .button3:hover {
+      background-color: #c0392b;
+      color: black;
+    }
+
+</style>
+</head>
+    <body>
+        {% block content %}
+        <div class="container">
+            <h2>Il tuo profilo</h2>
+            <form>
+            <p><strong>Username:</strong> {{ user.username }}</p>
+            <p><strong>Nome:</strong> {{ user.first_name }}</p>
+            <p><strong>Cognome:</strong> {{ user.last_name }}</p>
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            <p><strong>Data di nascita:</strong> {{ profilo.data_di_nascita|default:"Non specificata" }}</p>
+            <p><strong>Bio:</strong> {{ profilo.bio|default:"Nessuna bio disponibile" }}</p>
+            
+          <a href="{% url 'libreria:homelib' %}">
+              <botton  class="button button3" type="submit">Torna alla Home</botton>
+          </a>
+
+            <a href="{% url 'libreria:modifica_profilo' %}">
+              <button class="button button2" type="button">Modifica Profilo</button>
+          </a>
+
+            <a href="{% url 'libreria:logout' %}">
+              <button class="button button1" type="button">Esegui il logout</button>
+          </a>
+            </form>
+        </div>
+        {% endblock %}
+    </body>
+</html>

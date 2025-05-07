@@ -1,0 +1,196 @@
+{% load static %}
+<!DOCTYPE html> 
+<html>
+<head>
+  <style>
+    body {
+      background-image: url("{% static 'images/Background_shop.png' %}");
+      background-size: cover;
+      background-position: center;
+      color: #FFFFFF;
+      font-family: 'Playfair Display', sans-serif;
+      text-align: center;
+      padding-top: 50px; 
+    }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center; 
+      gap: 20px;
+    }
+    .book {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+    width: 250px;
+    text-align: center;
+    }
+    
+    .book img {
+    width: 150px;
+    height: 200px;
+    object-fit: cover; /* Assicura che l'immagine riempia lo spazio senza distorcersi */
+    border-radius: 5px;
+    margin-top: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+    } 
+
+    .book p {
+    margin-bottom: 5px;
+    }
+
+    h2 {
+      font-size: 2.5em;
+      text-shadow: 2px 2px 8px #000000;
+      margin-bottom: 20px;
+      justify-content: center;
+    }
+    form {
+      background: none;
+      padding: 10px;
+      border-radius: 10px;
+      align-items: center;
+    }
+    .button-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px; /* spazio tra i bottoni */
+      margin-top: 10px;
+    }
+
+    .button-group form {
+      margin: 0; /* toglie margine extra dal form */
+    }
+
+    .button1 {
+      background-color: black;
+      color: white;
+      border: 3px solid #f4d03f;
+      padding: 10px 20px;
+      font-size: 1.2em;
+      border-radius: 10px;
+      cursor: pointer;
+      transition-duration: 0.4s;
+      margin-top: 10px;
+    }
+    .button1:hover {
+      background-color: #f4d03f;
+      color: black;
+    }
+    .button2 {
+      background-color: black;
+      color: white;
+      border: 3px solid #e67e22;
+      padding: 10px 20px;
+      font-size: 1.2em;
+      border-radius: 10px;
+      cursor: pointer;
+      transition-duration: 0.4s;
+      margin-top: 10px; 
+    }
+    .button2:hover {
+      background-color: #e67e22;
+      color: black;
+    }
+    .button3 {
+      background-color: black;
+      color: white;
+      border: 3px solid #c0392b;
+      padding: 10px 20px;
+      font-size: 1.2em;
+      border-radius: 10px;
+      cursor: pointer;
+      transition-duration: 0.4s;
+      margin-top: 10px;
+    }
+    .button3:hover {
+      background-color: #c0392b;
+      color: black;
+    }
+
+    .category-bar {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 30px;
+    margin-top: 20px;
+    }
+
+    .category-bar form {
+    margin: 0;
+    }
+
+    </style>
+
+<body> <!--per ogni libro registrato nel database dell'admin, viene mostrato il titolo, il prezzo e la copertina-->
+
+{% block content %}
+  <h2>Tutti i nostri libri</h2>
+    <p>
+      <a href="{% url 'libreria:homelib' %}">
+        <button class="button button2">Torna alla home</button>
+      </a>
+    </p>
+
+  <!-- Sidebar categorie -->
+  <div class="category-bar">
+    <form method="get" action="{% url 'libreria:shop' %}">
+      <button type="submit" class="button3">
+        Tutti i libri
+      </button>
+    </form>
+
+    {% for categoria in categorie %}
+      <form method="get" action="{% url 'libreria:shop' %}">
+        <input type="hidden" name="categoria" value="{{ categoria.id }}">
+        <button type="submit"
+            class="{% if categoria.id|stringformat:'s' == categoria_attiva %}button2{% else %}button1{% endif %}">
+          {{ categoria.nome }}
+        </button>
+      </form>
+    {% endfor %}
+  </div>
+
+  <!-- Container libri -->
+  <div class="container">
+    {% for libreria in libri %}
+
+      <div class="book">
+        <h3>{{ libreria.titolo }}</h3>
+          <p>Autore: {{ libreria.autore }}</p>
+          <p>Prezzo: {{ libreria.prezzo }}€</p>
+        {% if libreria.copertina %}
+          <img src= "{{libreria.copertina.url}}">
+        {%else%}
+          <p>Copertina non disponibile</p>
+        
+        {%endif%}
+      
+        <div class="button-group">
+          <form method="post" action="{% url 'libreria:acquista' libreria.id %}">
+          {% csrf_token %} <!--tag che protegge i form da attacchi Cross-Site Request Forgery-->
+            <button type="submit" class="button button1">Acquista</button> 
+          <!--dopo aver cliccato su questo pulsante si avvierà il form-->
+          </form>
+          
+          <a href="{% url 'libreria:infolibri' libreria.id %}">
+            <button class="button button2">Scopri la trama</button>
+          </a>
+          <a href="{% url 'libreria:autori' libreria.autore.id %}">
+            <button class="button button3">Scopri l'autore</button>
+          </a>
+        </div>
+      </div>
+    {% endfor %} 
+  </div>
+{% endblock %}
+</body>
+</html>

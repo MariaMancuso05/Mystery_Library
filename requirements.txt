@@ -1,0 +1,10 @@
+asgiref==3.8.1
+Django==5.1.7
+django-credit-cards==0.4.1
+pillow==11.1.0
+sqlparse==0.5.3
+tzdata==2025.1
+
+# Questo è l'elenco di tutte le dipendenze Python installate nell'ambiente virtuale.
+# L'elenco è stato generato con il comando pip freeze > requirements.txt
+# Questo file di testo permette a chiunque scarichi il progetto di ricreare l'ambiente virtuale con le stesse dipendenze.

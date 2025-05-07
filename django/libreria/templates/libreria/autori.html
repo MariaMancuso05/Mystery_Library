@@ -1,0 +1,92 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      background-image: url("{% static 'images/Background_Acquisti.png' %}");
+      background-size: cover;
+      background-position: center;
+      color: #FFFFFF;
+      font-family: 'Playfair Display', sans-serif;
+      text-align: center;
+      padding-top: 50px;
+    }
+
+    .autore-container {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+      max-width: 600px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .autore-img {
+      width: 200px;
+      height: auto;
+      object-fit: cover;
+      border-radius: 5px;
+      margin-top: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+    }
+
+    h2 {
+      font-size: 2.5em;
+      text-shadow: 2px 2px 8px #000000;
+      margin-bottom: 20px;
+    }
+
+    .button3 {
+      background-color: black;
+      color: white;
+      border: 3px solid #c0392b;
+      padding: 10px 20px;
+      font-size: 1.2em;
+      border-radius: 10px;
+      cursor: pointer;
+      transition-duration: 0.4s;
+      margin-top: 20px;
+    }
+
+    .button3:hover {
+      background-color: #c0392b;
+      color: black;
+    }
+
+    .autore-info {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  {% block content %}
+    <h2>L'autore</h2>
+
+    <div class="autore-container">
+      <h3>{{ autore.nome }} {{ autore.cognome }}</h3>
+      <p>Data di nascita: {{ autore.data_nascita }}</p>
+
+      {% if autore.immagine %}
+        <img src="{{ autore.immagine.url }}" alt="Immagine di {{ autore.nome }}" class="autore-img">
+      {% else %}
+        <p>Immagine non disponibile</p> 
+      {% endif %}
+
+      <div class="autore-info">
+        {% if autore.presentazione_dell_autore %}
+        <h3>Presentazione dell'autore</h3>
+        <p>{{ autore.presentazione_dell_autore }}</p>
+        {% else %}
+        <p>Presentazione non disponibile</p>
+        {% endif %}
+      </div>
+
+      <a href="{% url 'libreria:shop' %}">
+        <button class="button3">Torna allo shop</button>
+      </a>
+    </div>
+  {% endblock %}
+</body>
+</html>

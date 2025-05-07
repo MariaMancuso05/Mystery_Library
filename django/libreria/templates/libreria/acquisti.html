@@ -1,0 +1,133 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      background-image: url("{% static 'images/Background_Acquisti.png' %}");
+      background-size: cover;
+      background-position: center;
+      color: #FFFFFF;
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      padding-top: 50px;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100vh;
+    }
+    h2 {
+      font-size: 2.5em;
+      text-shadow: 2px 2px 8px #000000;
+      margin-bottom: 20px;
+    }
+    form {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+      text-align: left;
+      margin: auto; /* Tiene il form centrato, ma il testo a sinistra */
+      width: 300px;
+    }
+    input[type="number"] {
+      width: calc(100% - 20px);
+      padding: 10px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 5px;
+      font-size: 1em;
+    }
+
+    .button1 {
+      background-color: black;
+      color: white;
+      border: 3px solid #e67e22;
+      padding: 10px 20px;
+      font-size: 1.2em;
+      border-radius: 10px;
+      cursor: pointer;
+      transition-duration: 0.4s;
+      margin-top: 10px;
+    }
+    .button2 {
+      background-color: black;
+      color: white;
+      border: 3px solid #c0392b;
+      padding: 10px 20px;
+      font-size: 1.2em;
+      border-radius: 10px;
+      cursor: pointer;
+      transition-duration: 0.4s; 
+      margin-top: 10px;
+      text-decoration: none;
+    }
+    .button1:hover {
+      background-color: #e67e22;
+      color: black;
+    }
+    .button2:hover {
+      background-color: #c0392b;
+      color: black;
+    }
+    </style>
+</head>
+<body>
+
+    {% block content %}
+    <div class="container">
+      <h2>Acquista: {{ libreria.titolo }}</h2>
+  
+      <!-- Aggiungere autore -->
+      <p><strong>Prezzo:</strong> {{ libreria.prezzo }} €</p>
+  
+      <form method="post">
+        {% csrf_token %}
+  
+        <!-- Campo per la quantità -->
+        <div class="form-group">
+          <label for="quantita">Quantità:</label>
+          <input type="number" id="quantita" name="quantita" value="1" min="1" class="form-control">
+        </div>
+  
+        <!-- Form dati carta -->
+        <h3>Inserisci i dati della carta</h3>
+  
+        <div class="form-group">
+          {{ form.titolare_della_carta.label_tag }}
+          {{ form.titolare_della_carta }}
+          {{ form.titolare_della_carta.errors }}
+        </div>
+  
+        <div class="form-group">
+          {{ form.numero_della_carta.label_tag }}
+          {{ form.numero_della_carta }}
+          {{ form.numero_della_carta.errors }}
+        </div>
+  
+        <div class="form-group">
+          {{ form.data_di_scadenza.label_tag }}
+          {{ form.data_di_scadenza }}
+          {{ form.data_di_scadenza.errors }}
+        </div>
+  
+        <div class="form-group">
+          {{ form.cvv.label_tag }}
+          {{ form.cvv }}
+          {{ form.cvv.errors }}
+        </div>
+  
+        <!-- Bottone di acquisto -->
+        <button type="submit" class="button1">Conferma acquisto</button>
+      <p>
+      <a href="{% url 'libreria:shop' %}" class="button2">Annulla pagamento</a>
+    </p>
+    </form>
+  </div>
+
+    {% endblock %}
+  
+</body>
+</html>
