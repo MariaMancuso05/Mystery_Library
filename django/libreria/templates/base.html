@@ -1,8 +1,9 @@
 <!-- templates/base.html -->
 {% load static %}
-<!DOCTYPE html> <!-- mostra lo stile per le pagine di signup, login e logout -->
+<!DOCTYPE html>  <!-- mostra lo stile per le pagine di signup, login e logout -->
 <html>
 <head>
+  <title>{% block title %}Titolo predefinito{% endblock %}</title>
   <style>
     body {
       background-image: url("{% static 'images/Background_signup_login.png' %}");
@@ -82,6 +83,11 @@
       background-color: #c0392b;
       color: black;
     }
-    </style>
+  </style>
 </head>
+<body>
+  {% block content %}
+  <!-- Contenuto specifico della pagina andrà qui -->
+  {% endblock %}
+</body>
 </html>

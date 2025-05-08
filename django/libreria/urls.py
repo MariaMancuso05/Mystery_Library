@@ -16,7 +16,5 @@ urlpatterns = [
     path("acquista/<int:oggetto_acquistato_id>", views.acquista_libro, name='acquista'),
     path("autore/<int:autore_id>", views.autori, name="autori"),
     path("libro/<int:libro_id>", views.infolibri, name="infolibri"),
-    #path('acquisti/', views.acquisti, name="acquisti"),
-    #path('acquista/<int:libro_id>/', views.acquista_libro, name='acquista_libro'),
-    #path('lista_acquisti/', views.lista_acquisti, name='lista_acquisti'),
+    path("acquisto_completato", views.acquisto_completato, name="acquisto_completato"),
 ]

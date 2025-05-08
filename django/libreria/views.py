@@ -94,6 +94,9 @@ def acquista_libro(request, oggetto_acquistato_id):
 
     return render(request, 'libreria/acquisti.html', {'libreria': libro, 'form': form})
 
+def acquisto_completato(request):
+    return render(request, "libreria/acquisto_completo.html")
+
 
 #@login_required
 #def lista_acquisti(request):

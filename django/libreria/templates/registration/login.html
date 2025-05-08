@@ -1,21 +1,17 @@
 <!-- templates/registration/login.html -->
-{% extends "base.html" %}
-<!DOCTYPE html>
-<html>
-    <body>
-        {% block title %}Login{% endblock %}
+    {% extends "base.html" %}
 
-        {% block content %}
-        <div class="container">
+    {% block title %}Login{% endblock %}
+    
+    {% block content %}
+    <div class="container">
         <h2>Log In</h2>
-            <form method="post">  <!-- per l'invio dei dati -->
+        <form method="post">  <!-- per l'invio dei dati -->
             {% csrf_token %}
-            {{ form }}
-            <a href="http://localhost:8000/libreria/profilo/">
+            {{ form }} 
+            <a href="{% url 'libreria:profilo' %}"></a>
             <button class="button button2" type="submit">Log In</button>
-            </a>
-            </form> 
-        </div>
-            {% endblock %} 
-    </body>
-</html>
+        </form> 
+    </div>
+    {% endblock %}
+    
