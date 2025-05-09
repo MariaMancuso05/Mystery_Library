@@ -30,11 +30,11 @@ python -m venv venv
 ```
 cmd
 ```bash
->>> venv\\Scripts\\activate
+>>> venv\Scripts\activate
 ```
 git bash
 ```bash
-$ source venv\\Scripts\\activate
+$ source venv/Scripts/activate
 ```
 **LINUX/MAC:**
 ```bash
