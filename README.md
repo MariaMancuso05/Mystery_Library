@@ -91,6 +91,12 @@ python manage.py runserver
 
 ---
 
+## Creazione profilo utente
+- Se viene fatta la registrazione di un utente direttamente dal template di signup, verrà automaticamente creato il profilo di quell'utente
+- Invece, se l'utente viene creato tramite la pagina admin, per poter accedere al profilo, deve essere aggiunto manualmente al modello "Profilo" 
+
+---
+
 ## Struttura delle principali URL
 
 - `/libreria/login/` — Login utente
