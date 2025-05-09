@@ -12,6 +12,10 @@ Mystery Library è una web app realizzata con Django che permette agli utenti di
 - **Logout sicuro**
 
 ---
+## Dipendenze principali
+
+- Python 3.8+
+- Django 5.x
 
 ## Installazione
 
@@ -26,7 +30,7 @@ cd <cartella_del_progetto>
 
 **WINDOWS:**
 ```bash
-python -m venv venv
+python -m venv .venv
 ```
 cmd
 ```bash
@@ -34,12 +38,12 @@ cmd
 ```
 git bash
 ```bash
-$ source venv/Scripts/activate
+$ source .venv/Scripts/activate
 ```
 **LINUX/MAC:**
 ```bash
-python3 -m venv venv
-source venv/bin/activate
+python3 -m venv .venv
+source .venv/bin/activate
 ```
 
 ### 3. Installa le dipendenze
@@ -101,9 +105,6 @@ python manage.py runserver
 
 ---
 
-## Dipendenze principali
 
-- Python 3.8+
-- Django 5.x
 
 
