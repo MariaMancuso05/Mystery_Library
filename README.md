@@ -32,7 +32,7 @@ cmd
 ```bash
 >>> venv\\Scripts\\activate
 ```
-bash
+git bash
 ```bash
 $ source venv\\Scripts\\activate
 ```
