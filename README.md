@@ -6,12 +6,16 @@ Mystery Library è una web app realizzata con Django che permette agli utenti di
 
 - **Registrazione e login/logout utenti**
 - **Gestione profilo personale** (visualizzazione e modifica dati)
+- **Profilo utente con storico acquisti**
 - **Catalogo libri** con dettagli e possibilità di acquisto
-- **Storico acquisti**
 - **Votazione libri**
 - **Logout sicuro**
 
 ---
+## Dipendenze principali
+
+- Python 3.8+
+- Django 5.x
 
 ## Installazione
 
@@ -24,15 +28,22 @@ cd <cartella_del_progetto>
 
 ### 2. Crea e attiva un ambiente virtuale
 
-**Windows:**
+**WINDOWS:**
 ```bash
-python -m venv venv
-venv\\Scripts\\activate
+python -m venv .venv
 ```
-**Linux/Mac:**
+cmd
 ```bash
-python3 -m venv venv
-source venv/bin/activate
+>>> venv\Scripts\activate
+```
+git bash
+```bash
+$ source .venv/Scripts/activate
+```
+**LINUX/MAC:**
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
 ```
 
 ### 3. Installa le dipendenze
@@ -41,7 +52,7 @@ source venv/bin/activate
 pip install django
 ```
 
-Se hai un file `requirements.txt`, puoi usare:
+Installa il file `requirements.txt`:
 ```bash
 pip install -r requirements.txt
 ```
@@ -71,7 +82,7 @@ python manage.py runserver
 
 - Accedi all'applicazione su [http://localhost:8000/](http://localhost:8000/)
 - Registrati o effettua il login per accedere alle funzionalità riservate
-- Naviga tra shop, profilo, storico acquisti, vota i libri e gestisci il tuo account
+- Naviga tra shop, profilo, vota i libri e gestisci il tuo account
 
 ---
 
@@ -90,14 +101,10 @@ python manage.py runserver
 ## Note importanti
 
 - Assicurati che la cartella `static` e la cartella `media` esistano nella root del progetto per la gestione di file statici e media.
-- In ambiente di produzione, imposta `DEBUG = False` e configura correttamente `ALLOWED_HOSTS`.
 - Puoi accedere all'admin Django su `/admin/` con le credenziali del superuser.
 
 ---
 
-## Dipendenze principali
 
-- Python 3.8+
-- Django 5.x
 
 
