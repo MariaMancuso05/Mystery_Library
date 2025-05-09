@@ -52,9 +52,14 @@ def infolibri(request, libro_id):
 #per la registrazione degli utenti
 class SignUpView(CreateView): #per aggiungere un nuovo utente nel database dopo che è stata fatta la registrazione
     form_class = UserCreationForm #richiama il form già pronto di Django
-    success_url = reverse_lazy("login") # quando la registrazione va a buon fine, l'utente viene mandato alla pagina di login.
+    success_url = reverse_lazy("libreria:login") # quando la registrazione va a buon fine, l'utente viene mandato alla pagina di login.
     template_name = "registration/signup.html" #dice a Django quale template html mostrare per la pagina di registrazione.
 
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        # Crea automaticamente il profilo associato
+        Profilo.objects.create(username=self.object)
+        return response
 
 @login_required #dopo il login viene mostrato il profilo dell'utente
 def profilo_utente(request):
