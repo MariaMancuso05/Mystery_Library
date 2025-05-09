@@ -17,4 +17,5 @@ urlpatterns = [
     path("autore/<int:autore_id>", views.autori, name="autori"),
     path("libro/<int:libro_id>", views.infolibri, name="infolibri"),
     path("acquisto_completato", views.acquisto_completato, name="acquisto_completato"),
+    path('libro/<int:libro_id>/vota/', views.vota_libro, name='vota_libro'),
 ]

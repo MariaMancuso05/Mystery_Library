@@ -12,13 +12,26 @@ body {
   text-align: center;
   padding-top: 100px;
 } 
-.container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
+.wrap {  /*per avvolgere insieme i due contenitori "box" */
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
 }
+
+.box {
+  background: rgba(0, 0, 0, 0.7);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+  width: 350px;
+}
+
+ul {
+  text-align: left;
+  margin-top: 20px;
+}
+
 form {
       background: rgba(0, 0, 0, 0.7);
       padding: 20px;
@@ -100,12 +113,32 @@ a {
       background-color: #c0392b;
       color: black;
     }
-
+  /* Per i pulsanti di votazione */
+    .button-small {
+      background-color: black;
+      color: white;
+      border: 2px solid #c0392b;
+      padding: 5px 10px;
+      font-size: 0.9em;
+      border-radius: 8px;
+      cursor: pointer;
+      transition-duration: 0.4s;
+      margin-left: 10px;
+      display: inline-block;
+      width: auto;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+    .button-small:hover {
+      background-color: #c0392b;
+      color: black;
+    }
 </style>
 </head>
     <body>
         {% block content %}
-        <div class="container">
+        <div class="wrap">
+        <div class="box">
             <h2>Il tuo profilo</h2>
             <form>
             <p><strong>Username:</strong> {{ user.username }}</p>
@@ -128,6 +161,28 @@ a {
           </a>
             </form>
         </div>
+
+        <div class="box">
+          <h3>Ciao {{ user.username }}, questi sono i tuoi libri acquistati:</h3>
+         
+              {% if acquisti %}
+              <ul>
+                {% for acquisto in acquisti %}
+              <li>
+                <strong>{{ acquisto.oggetto_acquistato.titolo }}</strong> di {{ acquisto.oggetto_acquistato.autore }}
+                  - Acquistato il {{ acquisto.data_acquisto|date:"d/m/Y" }} 
+                  - Quantità: {{ acquisto.quantita }}
+                  <a href="{% url 'libreria:vota_libro' acquisto.oggetto_acquistato.id %}" class="button button-small">
+                        Vota questo libro</a>
+              </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p>Non hai ancora acquistato alcun libro.</p> 
+            {% endif %}
+
+        </div>
+      </div>
         {% endblock %}
     </body>
 </html>

@@ -1,13 +1,14 @@
 # Create your views here.
-from django.http import HttpResponse, HttpRequest
+from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from .models import Libreria, Profilo, User, Acquisti, Autori, Categoria, Trame
+from .models import Libreria, Profilo, User, Acquisti, Autori, Categoria, Votazione
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy 
 from django.views.generic import CreateView #crea un nuovo oggetto nel database
 from django.contrib.auth import logout
 from .forms import CartaFittiziaForm, ProfiloForm
+from django.contrib import messages
 
 
 def index(request):
@@ -40,9 +41,12 @@ def autori(request, autore_id):
 def infolibri(request, libro_id):
     libro=Libreria.objects.get(id=libro_id)
     trama = getattr(libro, 'trame', None)
+    votazioni = Votazione.objects.filter(libro=libro)
+
     return render(request, "libreria/infolibri.html", {
         "libro":libro,
-        "trama":trama
+        "trama":trama,
+        "votazioni":votazioni
         }) 
 
 #per la registrazione degli utenti
@@ -51,14 +55,18 @@ class SignUpView(CreateView): #per aggiungere un nuovo utente nel database dopo 
     success_url = reverse_lazy("login") # quando la registrazione va a buon fine, l'utente viene mandato alla pagina di login.
     template_name = "registration/signup.html" #dice a Django quale template html mostrare per la pagina di registrazione.
 
+
 @login_required #dopo il login viene mostrato il profilo dell'utente
 def profilo_utente(request):
     profilo = Profilo.objects.get(username=request.user)
-    return render(request, 'registration/profilo.html', {'profilo': profilo})
+    # Recupera tutti gli acquisti dell'utente e carica anche i dati del libro in un'unica query
+    acquisti = Acquisti.objects.filter(acquirente=request.user).select_related('oggetto_acquistato')
+    
+    return render(request, 'registration/profilo.html',{
+        'profilo': profilo,
+        'acquisti': acquisti
+        })
 
-def logout_view(request):
-    logout(request)
-    return render(request, "registration/logout.html")
 
 @login_required
 def modifica_profilo(request):
@@ -75,6 +83,11 @@ def modifica_profilo(request):
     return render(request, 'registration/modifica_profilo.html', {'form': form})
 
 
+def logout_view(request):
+    logout(request)
+    return render(request, "registration/logout.html")
+
+
 @login_required  #permette agli utenti loggati di acquistare i libri disponibili e di pagare tramite carta
 def acquista_libro(request, oggetto_acquistato_id):
     libro = Libreria.objects.get(id=oggetto_acquistato_id)
@@ -83,7 +96,8 @@ def acquista_libro(request, oggetto_acquistato_id):
         # Gestione dell'acquisto
         quantita = int(request.POST.get('quantita', 1))
         Acquisti.objects.create(acquirente=request.user, oggetto_acquistato=libro, quantita=quantita)
-        
+        #l'utente viene associato al proprio acquisto
+
         # Form della carta
         form = CartaFittiziaForm(request.POST)
         if form.is_valid():
@@ -94,8 +108,33 @@ def acquista_libro(request, oggetto_acquistato_id):
 
     return render(request, 'libreria/acquisti.html', {'libreria': libro, 'form': form})
 
+
 def acquisto_completato(request):
     return render(request, "libreria/acquisto_completo.html")
+
+#la view per la votazione dei libri acquistati dall'utente
+@login_required
+def vota_libro(request, libro_id):
+    libro = Libreria.objects.get(id=libro_id)
+    opzioni_voto = [(1, "1⭐"), (2, "2⭐"), (3, "3⭐"), (4, "4⭐"), (5, "5⭐")]
+
+    if request.method == 'POST':
+        voto_valore = int(request.POST.get('voto'))
+        recensione = request.POST.get('recensione', '')
+
+        votazione, created = Votazione.objects.update_or_create(
+            user=request.user,
+            libro=libro,
+            defaults={'voto': voto_valore, 'recensione': recensione}
+        )
+
+        messages.success(request, "Grazie per la tua votazione!")
+        return redirect('libreria:infolibri', libro_id=libro.id) 
+
+    return render(request, 'libreria/votazione.html', {
+        'libro': libro,
+        'opzioni_voto': opzioni_voto
+        })
 
 
 #@login_required

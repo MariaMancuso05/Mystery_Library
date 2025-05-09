@@ -15,7 +15,7 @@
 
     .libro-container {
       background: rgba(0, 0, 0, 0.7);
-      padding: 20px;
+      padding: 20px; 
       border-radius: 10px;
       box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
       max-width: 600px;
@@ -90,6 +90,22 @@
         <p>Trama non disponibile</p>
       {% endif %}
       </div>
+
+      <div class="libro-info">
+  <h3>Recensioni degli utenti</h3>
+
+  {% if votazioni %}
+    {% for votazione in votazioni %}
+        <p><strong>{{ votazione.user.username }}</strong> ha dato {{ votazione.voto }}⭐</p>
+        {% if votazione.recensione %}
+          <p><em>"{{ votazione.recensione }}"</em></p>
+        {% endif %}
+      <hr>
+    {% endfor %}
+  {% else %}
+    <p>Non ci sono ancora recensioni per questo libro.</p>
+  {% endif %}
+</div>
 
       <a href="{% url 'libreria:shop' %}">
         <button class="button3">Torna allo shop</button>
