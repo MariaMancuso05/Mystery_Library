@@ -1,0 +1,19 @@
+# Created by venv; see https://docs.python.org/3/library/venv.html
+venv/
+.venv/
+env/
+
+# Database
+#*.sqlite3
+
+# File Python compilati
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Configurazioni locali
+.Python
+.env
+.vscode/
+

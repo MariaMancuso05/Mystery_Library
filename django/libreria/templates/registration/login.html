@@ -4,14 +4,21 @@
     {% block title %}Login{% endblock %}
     
     {% block content %}
+
     <div class="container">
         <h2>Log In</h2>
+    
+            <a href="{% url 'libreria:homelib' %}">
+        <button class="button button1">Torna alla home</button>
+            </a>
+       
         <form method="post">  <!-- per l'invio dei dati -->
             {% csrf_token %}
             {{ form }} 
             <a href="{% url 'libreria:profilo' %}"></a>
             <button class="button button2" type="submit">Log In</button>
         </form> 
+
     </div>
     {% endblock %}
     

@@ -5,6 +5,11 @@
 {% block content %}
 <div class="container">
     <h2>Sign Up</h2>
+    <p>
+        <a href="{% url 'libreria:homelib' %}">
+            <button class="button button2">Torna alla home</button>
+        </a>
+    </p>
     <form method="post">   <!-- è la tecnica utilizzata da http per ricevere dati dal browser -->
         {% csrf_token %}
         {{ form.as_p }}
