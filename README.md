@@ -6,8 +6,8 @@ Mystery Library è una web app realizzata con Django che permette agli utenti di
 
 - **Registrazione e login/logout utenti**
 - **Gestione profilo personale** (visualizzazione e modifica dati)
+- **Profilo utente con storico acquisti**
 - **Catalogo libri** con dettagli e possibilità di acquisto
-- **Storico acquisti**
 - **Votazione libri**
 - **Logout sicuro**
 
@@ -71,7 +71,7 @@ python manage.py runserver
 
 - Accedi all'applicazione su [http://localhost:8000/](http://localhost:8000/)
 - Registrati o effettua il login per accedere alle funzionalità riservate
-- Naviga tra shop, profilo, storico acquisti, vota i libri e gestisci il tuo account
+- Naviga tra shop, profilo, vota i libri e gestisci il tuo account
 
 ---
 
@@ -90,7 +90,6 @@ python manage.py runserver
 ## Note importanti
 
 - Assicurati che la cartella `static` e la cartella `media` esistano nella root del progetto per la gestione di file statici e media.
-- In ambiente di produzione, imposta `DEBUG = False` e configura correttamente `ALLOWED_HOSTS`.
 - Puoi accedere all'admin Django su `/admin/` con le credenziali del superuser.
 
 ---
