@@ -64,11 +64,16 @@ cd django
 python manage.py migrate
 ```
 
-### 5. Crea un superuser (opzionale, per accedere all'admin)
+### 5. Crea un superuser 
 
 ```bash
 python manage.py createsuperuser
 ```
+### OPPURE
+Accedi all'admin già esitente con le credenziali sottostanti
+
+nome: "admin"
+password: "Mystery_Library345"
 
 ### 6. Avvia il server di sviluppo
 
@@ -80,7 +85,7 @@ python manage.py runserver
 
 ## Utilizzo
 
-- Accedi all'applicazione su [http://localhost:8000/](http://localhost:8000/)
+- Accedi all'applicazione su [http://localhost:8000/libreria](http://localhost:8000/libreria)
 - Registrati o effettua il login per accedere alle funzionalità riservate
 - Naviga tra shop, profilo, vota i libri e gestisci il tuo account
 
@@ -102,7 +107,7 @@ python manage.py runserver
 
 - Assicurati che la cartella `static` e la cartella `media` esistano nella root del progetto per la gestione di file statici e media.
 - Puoi accedere all'admin Django su `/admin/` con le credenziali del superuser.
-
+- il Database non viene ignorato dal file gitignore per una migliore esperienza sul progetto, i dati all'interno possono comunque essere cambiati tramite la pagina di admin http://localhost:8000/admin
 ---
 
 
