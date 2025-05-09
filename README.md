@@ -24,12 +24,19 @@ cd <cartella_del_progetto>
 
 ### 2. Crea e attiva un ambiente virtuale
 
-**Windows:**
+**WINDOWS:**
 ```bash
 python -m venv venv
-venv\\Scripts\\activate
 ```
-**Linux/Mac:**
+cmd
+```bash
+>>> venv\\Scripts\\activate
+```
+bash
+```bash
+$ source venv\\Scripts\\activate
+```
+**LINUX/MAC:**
 ```bash
 python3 -m venv venv
 source venv/bin/activate
