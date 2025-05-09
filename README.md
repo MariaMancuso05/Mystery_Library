@@ -41,7 +41,7 @@ source venv/bin/activate
 pip install django
 ```
 
-Se hai un file `requirements.txt`, puoi usare:
+Installa il file `requirements.txt`:
 ```bash
 pip install -r requirements.txt
 ```
