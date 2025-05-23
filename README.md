@@ -113,7 +113,8 @@ python manage.py runserver
 
 - Assicurati che la cartella `static` e la cartella `media` esistano nella root del progetto per la gestione di file statici e media.
 - Puoi accedere all'admin Django su `/admin/` con le credenziali del superuser.
-- il Database non viene ignorato dal file gitignore per una migliore esperienza sul progetto, i dati all'interno possono comunque essere cambiati tramite la pagina di admin http://localhost:8000/admin
+- Il Database non viene ignorato dal file gitignore per una migliore esperienza sul progetto, i dati all'interno possono comunque essere cambiati tramite la pagina di admin http://localhost:8000/admin
+- Per accedere alla parte acquisti è necessario il login dell'utente. 
 ---
 
 
